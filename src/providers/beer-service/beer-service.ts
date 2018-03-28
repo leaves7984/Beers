@@ -36,4 +36,8 @@ export class BeerServiceProvider {
 
     return result.catch(error => Observable.throw(error));
   }
+
+  remove(id: string) {
+    return this.http.delete(this.BEER_API + '/' + id);
+  }
 }
