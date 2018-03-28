@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage,ModalController, NavController, NavParams } from 'ionic-angular';
 import { BeerServiceProvider} from "../../providers/beer-service/beer-service";
 import { GiphyServiceProvider} from "../../providers/giphy-service/giphy-service";
+import { BeerModalPage} from "../beer-modal/beer-modal";
 
 /**
  * Generated class for the BeerPage page.
@@ -20,13 +21,14 @@ export class BeerPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public provider: BeerServiceProvider,
-              public gipyhProvider: GiphyServiceProvider) {
+              public beerProvider: BeerServiceProvider,
+              public gipyhProvider: GiphyServiceProvider,
+              public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
 
-    this.provider.getGoodBeers().subscribe(beers => {
+    this.beerProvider.getGoodBeers().subscribe(beers => {
       this.beers = beers;
       for (const beer of this.beers) {
         this.gipyhProvider.get(beer.name).subscribe(url => {
@@ -36,5 +38,14 @@ export class BeerPage {
     });
     console.log('ionViewDidLoad BeerPage');
   }
+
+  openModal(beerId) {
+    console.log(beerId);
+    let modal = this.modalCtrl.create(BeerModalPage, beerId);
+    modal.present();
+    // refresh data after modal dismissed
+    modal.onDidDismiss(() => this.ionViewDidLoad())
+  }
+
 
 }

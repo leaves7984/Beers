@@ -14,9 +14,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { BeerServiceProvider } from '../providers/beer-service/beer-service';
 import { HttpClientModule} from "@angular/common/http";
 import { GiphyServiceProvider } from '../providers/giphy-service/giphy-service';
+import { BeerModalPage} from "../pages/beer-modal/beer-modal";
 
 @NgModule({
   declarations: [
+    BeerModalPage,
     BeerPage,
     MyApp,
     AboutPage,
@@ -32,6 +34,7 @@ import { GiphyServiceProvider } from '../providers/giphy-service/giphy-service';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    BeerModalPage,
     BeerPage,
     MyApp,
     AboutPage,
